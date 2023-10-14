@@ -1,5 +1,5 @@
 {
-name: Home Assistant Add-on: USBIP Mounter
-url: 'https://github.com/AverageJoe89/hassio-usbip-mounter'
-maintainer: Avarage Joe <encynator@gmail.com>
+name: "Home Assistant Add-on: USBIP Mounter",
+url: "https://github.com/AverageJoe89/hassio-usbip-mounter",
+maintainer: "Avarage Joe <encynator@gmail.com>"
 }
