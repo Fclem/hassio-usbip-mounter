@@ -1,4 +1,5 @@
-# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
+{
 name: Home Assistant Add-on: USBIP Mounter
 url: 'https://github.com/AverageJoe89/hassio-usbip-mounter'
 maintainer: Avarage Joe <encynator@gmail.com>
+}
