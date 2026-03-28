@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.2.2
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:16.1.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -9,7 +9,8 @@ RUN apk add --no-cache \
     kmod \
     linux-tools-usbip \
     hwids-usb \
-    device-mapper-libs
+    device-mapper-libs \
+    grep
 
 # Copy root filesystem
 COPY rootfs /

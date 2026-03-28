@@ -32,6 +32,15 @@ if ! bashio::fs.file_exists "${mount_script}"; then
     server_address=$(bashio::config "devices[${device}].server_address")
     bus_id=$(bashio::config "devices[${device}].bus_id")
     bashio::log.info "Adding device from server ${server_address} on bus ${bus_id}"
-    echo "/usr/sbin/usbip --debug attach -r ${server_address} -b ${bus_id}" >> "${mount_script}"
+
+    echo "out=\$(/usr/sbin/usbip --debug attach -r ${server_address} -b ${bus_id} 2>&1) || rc=\$?" >> "${mount_script}"
+    echo "if echo \"\$out\" | grep -q \"Device busy (exported)\"; then" >> "${mount_script}"
+    echo "  bashio::log.info \"Device ${bus_id} already attached (busy/exported). Skipping.\"" >> "${mount_script}"
+    echo "  rc=0" >> "${mount_script}"
+    echo "fi" >> "${mount_script}"
+    echo "if [ \"\${rc:-0}\" -ne 0 ]; then" >> "${mount_script}"
+    echo "  bashio::log.error \"Attach failed for ${server_address} ${bus_id}: \$out\"" >> "${mount_script}"
+    echo "  exit \"\$rc\"" >> "${mount_script}"
+    echo "fi" >> "${mount_script}"
   done
 fi
